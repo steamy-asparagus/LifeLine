@@ -10,7 +10,7 @@
         }
         
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: white;
             display: flex;
             flex-direction: column;
@@ -19,8 +19,20 @@
         header {
             background: #e74c3c;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 65px;
+            box-sizing: border-box;
             animation: fadeIn 0.3s ease-in;
+        }
+        
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
         }
         
         nav {
@@ -51,6 +63,28 @@
             padding: 50px 20px;
             text-align: center;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .version {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+        
+        .header-quote {
+            font-size: 0.85rem;
+            font-style: italic;
+            text-align: right;
+            max-width: 55%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .hero h2 {
@@ -98,8 +132,15 @@
 </head>
 <body>
     <header>
+    <div class="brand-container">
         <h1>LifeLine</h1>
-    </header>
+        <span class="version">He 0.1 // PRERELEASE</span>
+    </div>
+
+    <div class="header-quote" id="weekly-quote">
+        Loading...
+    </div>
+</header>
     
     <nav>
         <a href="#" onclick="showPage('home')">Home</a>
@@ -121,6 +162,77 @@
         function startChat() {
             alert('Connecting to LAN chat server...');
         }
+
+                const weeklyQuotes = [
+            { text: "If you know the enemy and know yourself you need not fear the results of a hundred battles.", author: "Sun Tzu" },
+            { text: "Friendly fire - isn't.", author: "Unknown" },
+            { text: "I'm not stoned I'm justs F**ked up", author: "Green Day" },
+            { text: "Aim towards the Enemy.", author: "Instruction printed on US Rocket Launcher" },
+            { text: "Carpe diem. Seize the day, boys. Make your lives extraordinary.", author: "Dead Poets Society" },
+            { text: "Do you know what's worth fighting for when it's not worth dying for?", author: "Green Day" },
+            { text: "NO TRUMP, NO KKK, NO FASCIST U.S.A.", author: "Green Day" },
+            { text: "If you are going through hell, keep going.", author: "Winston Churchill" },
+            { text: "It's something unpredictable, but in the end, it's right. I hope you had the time of your life.", author: "Green Day" },
+            { text: "It's only after we've lost everything that we're free to do anything.", author: "Fight Club" },
+            { text: "The first rule of fight club is you do not talk about fight club.", author: "Fight Club" },
+            { text: "Who cares if one more light goes out? Well, I do.", author: "Linkin Park" },
+            { text: "Home is where your heart is, but what a shame, 'cause everyone's heart doesn't beat the same.", author: "Green Day" },
+            { text: "Don't let what you cannot do interfere with what you can do.", author: "John Wooden" },
+            { text: "To do something that you feel in your heart that's great, you need to make a lot of mistakes.", author: "Billie Joe Armstrong" },
+            { text: "Incoming fire has the right of way", author: "Unknown" },
+            { text: "Mankind must put an end to war, or war will put an end to mankind", author: "John F. Kennedy" },
+            { text: "School is practice for the future, and practice makes perfect, but if nobody's perfect why practice?", author: "Billie Joe Armstrong" },
+            { text: "So long as there are men, there will be wars.", author: "Albert Einstein" },
+            { text: "My first wish is to see this plague of mankind, war, banished from the earth.", author: "George Washington" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "If the wings are traveling faster than the fuselage, it's probably a helicopter -- and therefore, unsafe.", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Five second fuses only last three seconds.", author: "Infantry Journal" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "If your attack is going too well, you're walking into an ambush", author: "Infantry Journal" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Remember, Remember the 5th of November", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" },
+            { text: "Placeholder", author: "Unknown" }
+        ];
+
+        function setWeeklyQuote() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneWeek = 1000 * 60 * 60 * 24 * 7;
+            const weekNumber = Math.floor(diff / oneWeek);
+
+            const quoteData = weeklyQuotes[weekNumber];
+            
+            document.getElementById('weekly-quote').innerHTML = 
+                `"${quoteData.text}" <br> <span style='font-size: 0.75em; opacity: 0.8; font-weight: normal;'>- ${quoteData.author}</span>`;
+        }
+
+        setWeeklyQuote();
     </script>
 </body>
 </html>
